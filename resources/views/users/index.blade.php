@@ -1,14 +1,37 @@
 @extends('layouts.global')
 
 @section('title')
-    User List
+User List
 @endsection
 
 @section('content')
-    Daftar user di sini 
-    <br>
-    
-    @foreach ($users as $user)
-        - {{ $user->email }} <br>
-    @endforeach
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th><b>Name</b></th>
+            <th><b>Username</b></th>
+            <th><b>Email</b></th>
+            <th><b>Avatar</b></th>
+            <th><b>Action</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+        <tr>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->username }}</td>
+            <td>{{ $user->email }}</td>
+            <td>@if($user->avatar)
+                <img src="{{ asset('storage/'.$user->avatar) }}" width="70px" />
+                @else
+                    N/A
+                @endif
+            </td>
+            <td>[TODO: actions]</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+
 @endsection
