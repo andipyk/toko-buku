@@ -21,4 +21,8 @@ Route::match(['get', 'post'], '/register', function() {
     return redirect('/login');
 });
 
+
+Route::resource('users', 'UserController');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
