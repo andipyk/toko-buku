@@ -1,10 +1,19 @@
 @extends('layouts.global')
 
 @section('title')
-    Create New User
+Create New User
 @endsection
 
 @section('content')
+
+<div class="col-md-8">
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+
+
     <form enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{ route('users.store') }}" method="post">
         @csrf
         <label for="Name">Name</label>
@@ -20,7 +29,7 @@
         <label for="STAFF">Staff</label>
         <input type="checkbox" name="roles[]" id="CUSTOMER" value="CUSTOMER">
         <label for="Customer">Customer</label><br><br>
-        
+
         <label for="PhoneNumber">Phone Number</label>
         <input type="text" name="phone" id="phone" class="form-control">
         <br><br>
@@ -43,11 +52,12 @@
         <br><br>
 
         <label for="PasswordConfirmation">Password Confirmation</label>
-        <input type="password" name="password_conformation" id="password_conformation" placeholder="password conformation" class="form-control">
+        <input type="password" name="password_conformation" id="password_conformation" placeholder="password conformation"
+            class="form-control">
         <br><br>
 
         <input type="submit" value="Save" class="btn btn-primary">
-        
-    </form>
-@endsection
 
+    </form>
+</div>
+@endsection
