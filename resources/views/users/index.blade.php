@@ -27,7 +27,8 @@ User List
                     N/A
                 @endif
             </td>
-            <td>[TODO: actions]</td>
+            <td><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-info text-white btn-sm">Edit</a></td>
+            {{--  <td>[TODO: actions]</td>  --}}
         </tr>
         @endforeach
     </tbody>
