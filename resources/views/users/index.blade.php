@@ -5,6 +5,13 @@ User List
 @endsection
 
 @section('content')
+
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -27,7 +34,15 @@ User List
                     N/A
                 @endif
             </td>
-            <td><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-info text-white btn-sm">Edit</a></td>
+            <td>
+                <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-info text-white btn-sm">Edit</a>
+                <form action="{{ route('users.destroy', ['id' => $user->id ]) }}" class="d-inline" method="post" onsubmit="return confirm('Delete this user permanently?')">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                </form>
+            </td>
+            
             {{--  <td>[TODO: actions]</td>  --}}
         </tr>
         @endforeach
