@@ -41,6 +41,7 @@ User List
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                 </form>
+                <a href="{{ route('users.show', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">Detail</a>
             </td>
             
             {{--  <td>[TODO: actions]</td>  --}}
