@@ -66,8 +66,11 @@ User List
                 </span>
                 @else
                 <span class="badge badge-danger">
-                    Belum Verifikasi
-                    {{-- {{ $user->status }} --}}
+                    @if ($user->status)
+                        {{ $user->status }}
+                    @else
+                        Belum Verifikasi	
+                    @endif
                 </span>
                 @endif
             </td>
@@ -92,6 +95,7 @@ User List
         </tr>
         @endforeach
     </tbody>
+    <tfoot><tr><td colspan="10"> {{ $users->appends(Request::all())->links() }}</td></tr></tfoot>
 </table>
 
 
