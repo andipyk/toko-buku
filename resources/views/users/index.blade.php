@@ -10,8 +10,28 @@ User List
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
-@endif
+@endif 
 
+<div class="row">
+    <div class="col-md-6">
+        <form action="{{ route('users.index') }}" > {{-- Jangan Pakai method Post --}}
+            @csrf
+            <div class="input-group mb-3">
+                <input type="text" name="keyword" id="keyword" value="{{ Request::get('keyword') }}" class="form-control col-md-10">
+                <div class="input-group-append">
+                    <input type="submit" value="Filter" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a>
+    </div>
+</div>
 <table class="table table-bordered">
     <thead>
         <tr>

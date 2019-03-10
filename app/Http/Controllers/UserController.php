@@ -11,12 +11,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = \App\User::paginate(10);
-
-        return view('users.index', ['users' => $users]);
+        $filterKeyword = $request->get('keyword');
+        if($filterKeyword){
+            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10);
+       }
+       return view('users.index', ['users'=> $users]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
