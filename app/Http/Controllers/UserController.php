@@ -14,13 +14,31 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = \App\User::paginate(10);
+
         $filterKeyword = $request->get('keyword');
-        if($filterKeyword){
-            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10);
-       }
-       return view('users.index', ['users'=> $users]);
+
+        $statusFilter = $request->get('status');
+
+        if ($filterKeyword) {
+            if ($statusFilter) {
+                $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")
+                    ->where('status', $statusFilter)
+                    ->paginate(10);
+            } else {
+                $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")
+                    ->paginate(10);
+            }
+
+        }
+
+        if ($statusFilter) {
+            $users = \App\User::where('status', $statusFilter)->paginate(10);
+        } else {
+            $users = \App\User::paginate(10);
+        }
+
+        return view('users.index', ['users' => $users]);
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +76,6 @@ class UserController extends Controller
 
         return redirect()->route('users.create')->with('status', 'User Succefully Created');
 
-
     }
 
     /**
@@ -72,7 +89,7 @@ class UserController extends Controller
         $user = \App\User::findOrFail($id);
 
         return view('users.show', ['user' => $user]);
-        
+
     }
 
     /**
@@ -107,8 +124,8 @@ class UserController extends Controller
         // $user->status = $request->get('status');
 
         if ($request->file('avatar')) {
-            if ($user->avatar && file_exists(storage_path('app/public/'.$user->avatar))) {
-                \Storage::delete('public/'.$user->avatar);
+            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
+                \Storage::delete('public/' . $user->avatar);
             }
             $file = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $file;
@@ -132,6 +149,6 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->back()->with('status', 'User successfully deleted');
-        
+
     }
 }

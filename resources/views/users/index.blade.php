@@ -14,24 +14,34 @@ User List
 
 <div class="row">
     <div class="col-md-6">
-        <form action="{{ route('users.index') }}"> {{-- Jangan Pakai method Post --}}
-            @csrf
-            <div class="input-group mb-3">
-                <input type="text" name="keyword" id="keyword" value="{{ Request::get('keyword') }}" class="form-control col-md-10">
-                <div class="input-group-append">
+        <form action="{{ route('users.index') }}">
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control"
+                        placeholder="Filter by Email">
+                </div>
+                <div class="col-md-7">
+                    <input type="radio" name="status" value="ACTIVE" class="form-control" id="active"
+                    {{ Request::get('status') == 'ACTIVE' ? 'checked' : '' }}><label for="active">Active</label>
+                    <input type="radio" name="status" value="INACTIVE" class="form-control" id="inactive"><label for="inactive"
+                    {{ Request::get('status') == 'INACTIVE' ? 'checked' : '' }}>Inactive</label>
                     <input type="submit" value="Filter" class="btn btn-primary">
                 </div>
             </div>
         </form>
     </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-12 text-right">
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -57,7 +67,7 @@ User List
                 @else
                 <span class="badge badge-danger">
                     Belum Verifikasi
-                    {{--  {{ $user->status }}  --}}
+                    {{-- {{ $user->status }} --}}
                 </span>
                 @endif
             </td>
