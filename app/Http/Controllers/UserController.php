@@ -101,6 +101,7 @@ class UserController extends Controller
 
         $user->name = $request->get('name');
         $user->roles = json_encode($request->get('roles'));
+        $user->status = $request->get('status');
         $user->address = $request->get('address');
         $user->phone = $request->get('phone');
         // $user->status = $request->get('status');

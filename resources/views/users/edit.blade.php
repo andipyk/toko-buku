@@ -20,25 +20,25 @@ Edit User
         <input type="text" name="name" id="name" class="form-control" placeholder="Full Name" value="{{ $user->name }}"><br><br>
 
         <label for="Status">Status</label><br>
-        <input type="radio" class="form-control" name="status" id="active"
+        <input type="radio" class="form-control" name="status" id="active" value="ACTIVE"
             {{ $user->status == "ACTIVE" ? "checked" : "" }}> <label for="active">ACTIVE</label>
-        <input type="radio" class="form-control" name="status" id="inactive"
+        <input type="radio" class="form-control" name="status" id="inactive" value="INACTIVE"
             {{ $user->status !== "ACTIVE" ? "checked" : "" }}> <label for="inactive">INACTIVE</label>
         <br><br>
 
-        <label for="Roles">Roles</label><br>
-        <input type="checkbox" name="roles[]" id="ADMIN" value="ADMIN"
-            {{ in_array("ADMIN", json_decode($user->roles)) ? "checked" : "" }}>
+        <input type="checkbox" {{in_array("ADMIN", json_decode($user->roles)) ? "checked" : ""}} name="roles[]" id="ADMIN" value="ADMIN">
         <label for="ADMIN">Administrator</label>
-        <input type="checkbox" name="roles[]" id="STAFF" value="STAFF"
-            {{ in_array("STAFF", json_decode($user->roles)) ? "checked" : "" }}>
+
+        <input type="checkbox" {{in_array("STAFF", json_decode($user->roles)) ? "checked" : ""}} name="roles[]" id="STAFF" value="STAFF">
         <label for="STAFF">Staff</label>
-        <input type="checkbox" name="roles[]" id="CUSTOMER" value="CUSTOMER"
-            {{ in_array("CUSTOMER", json_decode($user->roles)) ? "checked" : "" }}>
-        <label for="Customer">Customer</label><br><br>
+
+        <input type="checkbox" {{in_array("CUSTOMER", json_decode($user->roles)) ? "checked" : ""}} name="roles[]" id="CUSTOMER" value="CUSTOMER">
+        <label for="CUSTOMER">Customer</label>
+
+        <br><br>
 
         <label for="PhoneNumber">Phone Number</label>
-        <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}" >
+        <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}">
         <br><br>
 
         <label for="Address">Address</label>
