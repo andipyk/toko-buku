@@ -21,8 +21,10 @@ Route::match(['get', 'post'], '/register', function() {
     return redirect('/login');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UserController');
+Route::resource('categories', 'CategoryController');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+
