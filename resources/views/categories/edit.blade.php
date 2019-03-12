@@ -25,7 +25,7 @@ Edit Category
         <input type="text" name="name" value="{{ $category->name }}" class="form-control"> <br><br>
 
         <label>Category Slug</label>
-        <input type="text" name="slug" value="{{ $category->slug }}" class="form-control"> <br> <br>
+        <input type="text" name="slug" value="{{ $category->slug }}" class="form-control" disabled> <br> <br>
 
         <label>Category Image</label>
         @if ($category->image)

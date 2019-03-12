@@ -47,7 +47,7 @@ TODO title index cateogry
                         No Image
                         @endif
                     </td>
-                    <td><a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
+                    <td><a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-info btn-sm">Edit</a> <a href="{{ route('categories.show', ['id' => $category->id]) }}" class="btn btn-warning btn-sm">Detail</a></td>
                 </tr>
                 @endforeach
             </tbody>
