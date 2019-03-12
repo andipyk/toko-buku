@@ -13,8 +13,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('categories.index');
+    {   
+        $categories = \App\Category::paginate(10);
+
+        return view('categories.index', ['categories' => $categories]);
     }
 
     /**
