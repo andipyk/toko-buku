@@ -132,6 +132,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = \App\Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back()->with('status', 'Category Successfully Moved to Trash');
     }
 }

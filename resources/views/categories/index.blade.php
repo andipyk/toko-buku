@@ -1,7 +1,6 @@
 @extends('layouts.global')
 
 @section('title')
-TODO title index cateogry
 @endsection
 
 @section('content')
@@ -26,6 +25,11 @@ TODO title index cateogry
 
 <div class="row">
     <div class="col-md-12">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <table class="table table-bordered table-stripped">
             <thead>
                 <tr>
@@ -47,7 +51,16 @@ TODO title index cateogry
                         No Image
                         @endif
                     </td>
-                    <td><a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-info btn-sm">Edit</a> <a href="{{ route('categories.show', ['id' => $category->id]) }}" class="btn btn-warning btn-sm">Detail</a></td>
+                    <td>
+                    <form action="{{ route('categories.destroy', ['id' => $category->id]) }}" method="POST" onsubmit="return confirm('Move category to trash?')">
+                        @csrf
+                        <input type="hidden" name="_method" value="Delete">
+                        {{-- Hanya untuk kerapian Edit dan Detail ada dalam form --}}
+                        <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-info btn-sm">Edit</a> <a href="{{ route('categories.show', ['id' => $category->id]) }}" class="btn btn-warning btn-sm">Detail</a>
+
+                        <input type="submit" value="Trash" class="btn btn-danger btn-sm">
+                    </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
