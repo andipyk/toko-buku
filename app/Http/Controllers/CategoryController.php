@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('categories.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -34,7 +35,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->get('name');
+
+        $new_category = new \App\Category;
+        $new_category->name = $name;
+
+        if ($request->file('image')) {
+            $image_path = $request->file('image')
+                ->store('category_image', 'public');
+
+            $new_category->image = $image_path;
+        }
+
+        $new_category->created_by = \Auth::user()->id;
+        $new_category->slug = str_slug($name, '-');
+
+        $new_category->save();
+
+        return redirect()->back()->with('status', 'Category Succesfully Added');
     }
 
     /**
