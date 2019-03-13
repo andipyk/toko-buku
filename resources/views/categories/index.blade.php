@@ -8,7 +8,8 @@
     <div class="col-md-6">
         <form action="{{ route('categories.index') }}">
             <div class="input-group">
-                <input type="text" name="name" class="form-control" placeholder="Filter by category name">
+                <input type="text" name="name" class="form-control" placeholder="Filter by category name"
+                value="{{ Request::get('name') }}">
 
                 <div class="input-group-append">
                     <input type="submit" value="Filter" class="btn btn-primary">
@@ -17,6 +18,12 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="col-md-6">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link active">Published</a></li>
+            <li class="nav-item"><a href="{{ route('categories.trash') }}" class="nav-link">Trash</a></li>
+        </ul>
     </div>
 </div>
 

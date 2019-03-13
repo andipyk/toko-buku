@@ -137,4 +137,27 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('status', 'Category Successfully Moved to Trash');
     }
+
+    public function trash()
+    {
+        $delete_category = \App\Category::onlyTrashed()->paginate(10);
+
+
+        return view('categories.trash', ['categories' => $delete_category]);
+    }
+
+    public function restore($id)
+    {   
+   
+        $category = \App\Category::withTrashed()->findOrFail($id);
+
+        if ($category->trashed()) {
+            $category->restore();
+        } else {
+            return redirect()->back()->with('status', 'Category is Not in trash');
+        }
+
+        return redirect()->back()->with('status', 'Category Successfully Restored');
+        
+    }
 }
