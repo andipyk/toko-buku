@@ -31,6 +31,11 @@ Trashed Categories
 
 <div class="row">
     <div class="col-md-12">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -54,7 +59,7 @@ Trashed Categories
                     <td>
                         <a href="{{ route('categories.restore', ['id' => $category->id]) }}" class="btn btn-success">Restore</a>
 
-                        <form action="{{ route('categories.delete-permanent'. ['id' => $category->id]) }}" class="d-inline">
+                        <form action="{{ route('categories.delete-permanent', ['id' => $category->id]) }}" class="d-inline" method="POST" onsubmit="return confirm('Delete this category permanently?')">
                             
                             @csrf
 

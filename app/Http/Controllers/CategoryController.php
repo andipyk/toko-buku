@@ -165,7 +165,7 @@ class CategoryController extends Controller
     {
         $category = \App\Category::withTrashed()->findOrFail($id);
 
-        if ($category->trashed()) {
+        if (!$category->trashed()) {
             return redirect()->back()->with('status', 'Can not delete permanent active category');
         } else {
             $category->forceDelete();
