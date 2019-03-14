@@ -53,6 +53,17 @@ Trashed Categories
                     </td>
                     <td>
                         <a href="{{ route('categories.restore', ['id' => $category->id]) }}" class="btn btn-success">Restore</a>
+
+                        <form action="{{ route('categories.delete-permanent'. ['id' => $category->id]) }}" class="d-inline">
+                            
+                            @csrf
+
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+
+                        </form>
+
                     </td>
                 </tr>
                 @endforeach
